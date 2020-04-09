@@ -19,12 +19,12 @@ defmodule TweetCommentWeb.TweetCommentLive do
 
   def render(assigns) do
     ~L"""
-    <div phx-hook="TweetComment">
+    <div class="container" phx-hook="TweetComment">
       <%= if @editing do %>
       <div>
         <%= f = form_for :tweet_comment, "#", [phx_change: :update, phx_submit: :save] %>
           <div class="comment-box">
-            <%= textarea f, :comment , class: "comments", nrow: 3, value: @comment %>
+            <%= textarea f, :comment , class: "comment-area", nrow: 3, value: @comment %>
             <div>
               <%= raw(@oembed) %>
             </div>
@@ -77,7 +77,7 @@ defmodule TweetCommentWeb.TweetCommentLive do
   defp build_oembed(comment) do
     case Twitter.scan_for_tweet_url(comment) do
       [first_tweet_url | _] ->
-        build_oembed_html(first_tweet_url) |> IO.inspect()
+        build_oembed_html(first_tweet_url)
 
       _ ->
         ""
