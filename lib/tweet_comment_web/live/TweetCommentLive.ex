@@ -11,7 +11,6 @@ defmodule TweetCommentWeb.TweetCommentLive do
     socket =
       socket
       |> assign(:comment, comment)
-      |> assign(:new_comment, comment)
       |> assign(:oembed, oembed)
       |> assign(:editing, false)
 
@@ -25,7 +24,7 @@ defmodule TweetCommentWeb.TweetCommentLive do
       <div>
         <%= f = form_for :tweet_comment, "#", [phx_change: :update, phx_submit: :save] %>
           <div class="comment-box">
-            <%= textarea f, :comment , class: "comments", nrow: 3 %>
+            <%= textarea f, :comment , class: "comments", nrow: 3, value: @comment %>
             <div>
               <%= raw(@oembed) %>
             </div>
