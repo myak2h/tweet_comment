@@ -1,0 +1,20 @@
+<div>
+  <form action="#" method="post" phx-change="update" phx-submit="save" phx-target="#i-contribution_196"><input
+      name="_csrf_token" type="hidden" value="FAcdIjANK1cZYV1hNyIRU1FiBkIUIXogUBPAWJM6-7lLythg81g0cmBb">
+    <div class="comment-box">
+      <textarea class="comments" id="contribution_new_comment" name="contribution[new_comment]"
+        phx-hook="TextArea">Interesting https://twitter.com/levelsio/status/1243569421446197252</textarea>
+      <div id="i-contribution_196_comment_oembed" phx-hook="Oembed" data-phx-component="19">
+        <blockquote class="twitter-tweet">
+          <p lang="en" dir="ltr">Curb your Corona <a href="https://t.co/16S4OehpWa">pic.twitter.com/16S4OehpWa</a>
+          </p>&mdash; ؜ (@levelsio) <a
+            href="https://twitter.com/levelsio/status/1243569421446197252?ref_src=twsrc%5Etfw">March 27, 2020</a>
+        </blockquote>
+      </div>
+      <div class="right">
+        <a href="#" phx-click="cancel-comment" phx-target="#i-contribution_196">Cancel</a>
+        <button type="submit">save</button>
+      </div>
+    </div>
+  </form>
+</div>
