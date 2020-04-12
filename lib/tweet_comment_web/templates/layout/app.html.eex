@@ -18,7 +18,12 @@
   <main role="main" class="container">
     <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
     <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-        <%= live_render(@conn, TweetCommentWeb.TweetCommentLive) %>
+    <%# Statefull live view component as source of truth %>
+    <%= live_render(@conn, TweetCommentWeb.TweetCommentLive) %> 
+    
+    <%# Live view as source of truth %>
+    <%# <%= live_render(@conn, TweetCommentWeb.TweetCommentLiveFull) %>  
+
     <%# Using surface %>
     <%# <%= live_render(@conn, TweetCommentWeb.Surface.TweetCommentLive) %> 
   </main>
