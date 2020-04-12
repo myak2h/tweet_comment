@@ -36,11 +36,12 @@ defmodule TweetComment.MixProject do
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, github: "phoenixframework/phoenix_live_view"},
+      {:phoenix_live_view, "~> 0.11.0"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:mojito, "~> 0.6.2"}
+      {:mojito, "~> 0.6.2"},
+      {:surface, github: "msaraiva/surface", ref: "4fb6f55f0243c7fad903ddd922a4c6667a46be02"}
     ]
   end
 end

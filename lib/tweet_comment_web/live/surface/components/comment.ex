@@ -1,10 +1,11 @@
-defmodule TweetCommentWeb.TweetCommentLive do
-  use Phoenix.LiveView
-  import Phoenix.HTML
+defmodule TweetCommentWeb.Surface.CommentLiveComponent do
+  use Surface.LiveComponent
   import Phoenix.HTML.Form
   alias TweetComment.Twitter
+  alias TweetCommentWeb.Surface.OembedComponent
+  alias Surface.Components.Raw
 
-  def mount(_, _, socket) do
+  def mount(socket) do
     [{:comment, comment}] = :ets.lookup(:tweet_comment, :comment)
     oembed = build_oembed(comment)
 
@@ -17,33 +18,36 @@ defmodule TweetCommentWeb.TweetCommentLive do
     {:ok, socket}
   end
 
+  def updated(assigns, socket) do
+    socket =
+      socket
+      |> assign(:id, assigns.id)
+
+    {:ok, socket}
+  end
+
   def render(assigns) do
-    ~L"""
-    <div class="container" phx-hook="TweetComment">
-      <%= if @editing do %>
-      <div>
-        <%= f = form_for :tweet_comment, "#", [phx_change: :update, phx_submit: :save] %>
+    ~H"""
+    <div id={{@id}} class="container" phx-hook="TweetComment">
+      <div :if={{@editing}} >
+        {{ f = form_for :tweet_comment, "#", [phx_change: :update, phx_submit: :save, phx_target: @myself] }}
           <div class="comment-box">
-            <%= textarea f, :comment , class: "comment-area", nrow: 3, value: @comment %>
-            <div>
-              <%= raw(@oembed) %>
-            </div>
+            {{ textarea f, :comment , class: "comment-area", nrow: 3, value: @comment }}
+            <OembedComponent oembed={{@oembed}}/>
             <div class="right">
-              <a href="#" phx-click="cancel">Cancel</a>
-              <%= submit "Save" %>
+              <a href="#" phx-click="cancel" phx-target={{@myself}} >Cancel</a>
+              {{submit "Save" }}
             </div>
           </div>
-        </form>
+        <#Raw></form></#Raw>
       </div>
-      <% else %>
-      <div>
-        <p><%= @comment %><p>
+      <div :if={{!@editing}} >
+        <p>{{@comment}} </p>
         <div>
-          <%= raw(@oembed) %>
+          <OembedComponent oembed={{@oembed}}/>
         </div>
-        <button phx-click="edit">Edit</button>
+        <button phx-click="edit" phx-target={{@myself}} >Edit</button>
       </div>
-      <% end %>
     </div>
     """
   end
